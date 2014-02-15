@@ -19,30 +19,21 @@ int main()
 			i=d-1;
 		if(flames[i]!='$')
 			flames[i]='$';
-		else
-		{
-			while(flames[i]=='$')
-			{	
-				i++;
-				if(i==j+1)
-					i=0;
-			}
-			flames[i]='$';	
-		}
 		
 		for(k=0; k<j; k++)
 		{
 			int h=k;
 			if(flames[k]=='$')
 			{
-				while(h<j)
+				while(h<=j)
 				{
 					flames[h]=flames[h+1];
 					h++;
 					if(h==j+1)
-					h=0;}
-				
+						break;
 				}
+				
+			}
 			flames[j]='\0';	
 		}
 		printf("%s\n", flames);
