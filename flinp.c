@@ -33,3 +33,22 @@ int count() {
   return l1 + l2 - 2 * ct;
 }
 
+char flames_calc(int count) {
+  char flames[] = "flames";
+  int a, i, l1, j;
+  a = 6;
+  i = 0;
+  
+  while(a > 1) {
+    l1 = strlen(flames);
+    i = (count + i - 1)%l1;
+    
+    for(j = i; j < l1 - 1; j++)
+      flames[j] = flames[j + 1];
+    flames[l1 - 1] = '\0';
+    a--;
+  }
+  return flames[0];
+}
+
+   
