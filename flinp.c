@@ -30,5 +30,6 @@ int count() {
       arr[name2[i] - 'a']--;
     }
   
-  return ct;
+  return l1 + l2 - ct;
 }
+
