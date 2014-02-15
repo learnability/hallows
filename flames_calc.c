@@ -12,10 +12,9 @@ int main()
 	while(j)
 	{
 		
-		//k=(c+i+1)/(j+1);
-		d=(c+i+1)%(j+1);
+		d=(c+i)%(j+1);
 		if(d==0)
-			i=5;
+			i=j;
 		else
 			i=d-1;
 		if(flames[i]!='$')
@@ -25,20 +24,34 @@ int main()
 			while(flames[i]=='$')
 			{	
 				i++;
-				if(i==6)
+				if(i==j+1)
 					i=0;
 			}
 			flames[i]='$';	
 		}
-		printf("%d\n", i);
+		
+		for(k=0; k<j; k++)
+		{
+			int h=k;
+			if(flames[k]=='$')
+			{
+				while(h<j)
+				{
+					flames[h]=flames[h+1];
+					h++;
+					if(h==j+1)
+					h=0;}
+				
+				}
+			flames[j]='\0';	
+		}
+		printf("%s\n", flames);
 		j--;
-				
-				
 	}
 	
 	for(i=0; i<6; i++)
 	{
-		if(flames[i]!='$')
+		if(flames[i]!='$' && flames[i]!='\0')
 			result=flames[i];
 	}
 	printf("result %c\n", result);
@@ -51,7 +64,7 @@ int main()
 		case 'm':	printf("Married...!!!\n"); break;
 		case 'e':	printf("Enemies :P\n"); break;
 		case 's':	printf("Sisters or well..brothers :D\n"); break;
-		default: 	printf("error\n");
+		default: 	printf("error\n"); break;
 		}
 		
 	return 0;
