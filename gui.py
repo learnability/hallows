@@ -1,15 +1,35 @@
 from functions import *
-from tkinter import *
-from tkinter import ttk
+from Tkinter import *
+import MySQLdb as sql
+
+
 
 def GetNames():
     a = text1.get()
     b = text2.get()
+    
+    db = sql.connect("192.168.62.223", "shrish", "shrishty", "FLAMES")
+    cursor = db.cursor()
+    
+    cmd = """ INSERT INTO entries(name1, name2)
+    		  VALUES ('%s', '%s')""" % (a, b)
+  
+    cursor.execute(cmd)
+    db.commit()
+    
+    db.close()
+    
     flames_outcome(a, b)
+    
+def keyEnter(event):
+	GetNames()
+
+def keyEsc(event):
+	frame1.destroy()
 
 def flames_outcome(a, b):
     msgbox = Tk()
-    msgbox.title("FLAMES_OUTCOME")
+    msgbox.title("FLAMES_OUTCOM`E")
     msgbox.geometry("300x100")
     name1 = Label(msgbox, text="Name1: " + a)
     name2 = Label(msgbox, text="Name2: " + b)
@@ -24,10 +44,11 @@ def flames_outcome(a, b):
     outcome = Label(msgbox, text=res)
     outcome.pack()
     
-
 frame1 = Tk()
 frame1.title("Flames")
 frame1.geometry("300x150")
+frame1.bind("<Return>", keyEnter)
+frame1.bind("<Escape>", keyEsc)
 
 L1 = Label(frame1, text="Enter first name below")
 L2 = Label(frame1, text="Enter second name below")

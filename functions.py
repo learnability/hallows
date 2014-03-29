@@ -9,21 +9,31 @@ def count(name1, name2):
         >>> count('', 'defg')
         0
     '''
+    name1 = name1.lower()
+    name2 = name2.lower()
     count_arr = {}
+    length1 = 0
+    length2 = 0
 
-    for i in "abcdefghijklmnopqrstuvwxyz":
+    for i in "abcdefghijklmnopqrstuvwxyz ":
         count_arr.update({i: 0})
 
     for i in name1:
-       count_arr[i] = count_arr[i] + 1
+        if i == ' ':
+            continue
+        length1 = length1 + 1
+        count_arr[i] = count_arr[i] + 1
 
     ct = 0
     for i in name2:
+        if i == ' ':
+            continue
+        length2 = length2 + 1
         if count_arr[i] > 0:
             ct = ct + 1
             count_arr[i] = count_arr[i] - 1
     
-    return len(name1) + len(name2) - 2 * ct
+    return length1 + length2 - 2 * ct
 
 
 def flames_calc(count):
@@ -61,7 +71,7 @@ def result(a):
     
     dict = { 'f': "Great, you are friends",
              'l': "Oho, Lovers",
-             'a': "Aquantances ",
+             'a': "Aquaintances ",
              'm': "Married ... !!",
              'e': "You are Enemies. Don't kill each other",
              's': "Sisters.. oh or brothers!!" }

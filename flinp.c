@@ -51,4 +51,3 @@ char flames_calc(int count) {
   return flames[0];
 }
 
-   
