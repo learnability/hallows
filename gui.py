@@ -1,25 +1,19 @@
 from functions import *
 from Tkinter import *
 import MySQLdb as sql
-
+import thread
 
 
 def GetNames():
     a = text1.get()
     b = text2.get()
-    
-    db = sql.connect("192.168.62.223", "shrish", "shrishty", "FLAMES")
-    cursor = db.cursor()
-    
-    cmd = """ INSERT INTO entries(name1, name2)
-    		  VALUES ('%s', '%s')""" % (a, b)
-  
-    cursor.execute(cmd)
-    db.commit()
-    
-    db.close()
-    
+
+    try:
+        thread.start_new_thread( access_db, (a, b))
+    except:
+        print "Something went wrong :("
     flames_outcome(a, b)
+    
     
 def keyEnter(event):
 	GetNames()
@@ -43,6 +37,23 @@ def flames_outcome(a, b):
 
     outcome = Label(msgbox, text=res)
     outcome.pack()
+
+def access_db(a, b):
+    try:
+        #print "here"
+        db = sql.connect("192.168.40.99", "b110076cs", "b110076cs", "db_b110076cs")
+        cursor = db.cursor()
+        #print "connected"
+        cmd = """ INSERT INTO FLAMES_ENTRIES(name1, name2)
+    		  VALUES ('%s', '%s')""" % (a, b)
+  
+        cursor.execute(cmd)
+        db.commit()
+    
+        db.close()
+    except:
+        print "SOMETHING WENT WRONG \n"
+
     
 frame1 = Tk()
 frame1.title("Flames")
