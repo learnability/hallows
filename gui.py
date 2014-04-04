@@ -2,11 +2,13 @@ from functions import *
 from Tkinter import *
 import MySQLdb as sql
 import thread
+import threading
 
 
 def GetNames():
     a = text1.get()
     b = text2.get()
+    
 
     try:
         thread.start_new_thread( access_db, (a, b))
@@ -23,7 +25,7 @@ def keyEsc(event):
 
 def flames_outcome(a, b):
     msgbox = Tk()
-    msgbox.title("FLAMES_OUTCOM`E")
+    msgbox.title("FLAMES_OUTCOME")
     msgbox.geometry("300x100")
     name1 = Label(msgbox, text="Name1: " + a)
     name2 = Label(msgbox, text="Name2: " + b)
@@ -40,10 +42,10 @@ def flames_outcome(a, b):
 
 def access_db(a, b):
     try:
-        #print "here"
-        db = sql.connect("192.168.40.99", "b110076cs", "b110076cs", "db_b110076cs")
+        print "here"
+        db = sql.connect("XXX.XXX.XX.XX", "XXX", "XXXX", "XXXX")
+        print "connected"
         cursor = db.cursor()
-        #print "connected"
         cmd = """ INSERT INTO FLAMES_ENTRIES(name1, name2)
     		  VALUES ('%s', '%s')""" % (a, b)
   
