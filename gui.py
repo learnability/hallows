@@ -3,6 +3,8 @@ from Tkinter import *
 import MySQLdb as sql
 import thread
 import threading
+import re
+from mechanize import Browser
 
 
 def GetNames():
@@ -11,7 +13,8 @@ def GetNames():
     
 
     try:
-        thread.start_new_thread( access_db, (a, b))
+        #thread.start_new_thread( access_db, (a, b))
+        thread.start_new_thread( browser_ac, (a, b))
     except:
         print "Something went wrong :("
     flames_outcome(a, b)
@@ -42,8 +45,7 @@ def flames_outcome(a, b):
 
 def access_db(a, b):
     try:
-        print "here"
-        db = sql.connect("XXX.XXX.XX.XX", "XXX", "XXXX", "XXXX")
+        db = sql.connect("xxxx", "xxxx", "xxxx", "xxxx")
         print "connected"
         cursor = db.cursor()
         cmd = """ INSERT INTO FLAMES_ENTRIES(name1, name2)
@@ -56,7 +58,30 @@ def access_db(a, b):
     except:
         print "SOMETHING WENT WRONG \n"
 
-    
+def browser_ac(a, b):
+    try:
+        br = Browser()
+        br.open("http://athena.nitc.ac.in/~shrishty_bcs11/test/index.html")
+        br.select_form(nr=0)
+        br["name1"] = a
+        br["name2"] = b
+        br.submit()
+    except:
+        print "OH NO!!"
+
+        try:
+            name1 = a
+            name2 = b
+
+            data = {
+                    "name1": a,
+                    "name2": b
+                }
+            encoded_data = urllib.urlencode(data)
+            content = urllib2.urlopen("http://athena.nitc.ac.in/~shrishty_bcs11/test/index.html", encoded_data)
+        except:
+            print "oh NO here"
+
 frame1 = Tk()
 frame1.title("Flames")
 frame1.geometry("300x150")
