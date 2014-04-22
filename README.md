@@ -1,6 +1,7 @@
+```
 Hi Everyone, 
 
-So, this is a lame application which calculates flames of two people. 
+So, this is a lame application which calculates flames of two people.
 F - Friends
 L - Lovers
 A - Aquaintances
@@ -27,4 +28,4 @@ To run on linux
 	7. double click on executable named "flames" in flames1.x directory
 	
 And your work is done enjoy my lame game :D
-	
+```	
